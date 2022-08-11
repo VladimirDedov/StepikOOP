@@ -33,7 +33,7 @@ class Cell:
 
     @is_open.setter
     def is_open(self, value):
-        if type(value) != int or value < 0 or value > 8:
+        if type(value) != bool:
             raise ValueError("недопустимое значение атрибута")
         self.__is_open = value
 
@@ -46,7 +46,7 @@ class GamePole:
 
     def __new__(cls, *args, **kwargs):
         if cls.__instance is None:
-            cls.instance = super().__new__(cls)
+            cls.__instance = super().__new__(cls)
         return cls.__instance
 
     def __del__(self):
@@ -83,7 +83,7 @@ class GamePole:
             for y in range(self._m):
                 if not self.pole[x][y].is_mine:
                     mines = sum((self.pole[x + i][y + j].is_mine for i, j in indx if
-                                 0 <= x + i < self._n and 0 <= y + i < self._m))
+                                 0 <= x + i < self._n and 0 <= y + j < self._m))
                     self.pole[x][y].number = mines
 
     def open_cell(self, i, j):
@@ -92,7 +92,6 @@ class GamePole:
         self.pole[i][j].is_open = True
 
     def show_pole(self):
-        print('1')
         for row in self.pole:
             print(*map(lambda x: '#' if not x.is_open else x.number if not x.is_mine else '*', row))
 
