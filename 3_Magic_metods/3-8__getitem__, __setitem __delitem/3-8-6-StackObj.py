@@ -38,7 +38,6 @@ class Stack:
             while h != item:
                 obj = obj.next
                 h += 1
-
             return obj
 
     def validate(self, key):
@@ -61,7 +60,6 @@ class Stack:
         while h != key:
             prev_obj=obj
             obj = obj.next
-
             h += 1
         if obj.next is not None:
             obj_next = obj.next
