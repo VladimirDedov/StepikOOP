@@ -57,7 +57,9 @@
 # n={int(i) for i in range(3)}
 # n= 5,5,6,'d'
 # print(n)
-l={}
-l[1]=[1,1,2]
-l[1][1]+=1
-print(l)
+
+l=[1,3,2]
+l2=[2,2,2]
+d=dict(zip(l[:2], l2))
+c=d[3]
+print(c)
