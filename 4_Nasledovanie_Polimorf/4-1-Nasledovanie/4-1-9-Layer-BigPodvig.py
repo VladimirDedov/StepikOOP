@@ -1,18 +1,17 @@
 class Layer:
-    prev_layer = None
-
-    def __init__(self, name='Layer'):
-        self.name = name
-        self.next_layer = None
+    def __init__(self, next_layer=None, name='Input'):
+        self.next_layer = next_layer
+        self.name = 'Layer'
 
     def __call__(self, *args, **kwargs):
-        self.next_layer = args[0]
-        return args[0]
+        self.next_layer = Layer()
+        return self.next_layer
 
 
 class Input(Layer):
     def __init__(self, inputs: int):
         self.inputs = inputs
+        self.name = 'Input'
         super().__init__(name='Input')
 
 
@@ -23,16 +22,16 @@ class Dense(Layer):
         self.outputs = outputs
         self.activation = activation
 
-
 class NetworkIterator:
     def __init__(self, obj):
-        self.obj = obj
+        self.obj=obj
 
     def __iter__(self):
-        while self.obj:
-            yield self.obj
-            self.obj = self.obj.next_layer
-
+        flag=True
+        if flag:
+            flag=False
+            yield self.obj.next_layer
+        yield self.obj
 
 network = Input(128)
 layer = network(Dense(network.inputs, 1024, 'linear'))
