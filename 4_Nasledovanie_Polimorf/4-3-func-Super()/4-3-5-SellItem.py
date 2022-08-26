@@ -47,5 +47,5 @@ ag.add_object(Land("участок под застройку", 3000000, 6.74))
 for obj in ag.get_objects():
     print(obj.name)
 
-lst_houses = [x for x in ag.get_objects() if isinstance(x, House)] # выделение списка домов
-print(lst_houses[0].name)
+lst_houses = [x.name for x in ag.get_objects() if isinstance(x, Flat)] # выделение списка домов
+print(*lst_houses)
