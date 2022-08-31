@@ -1,4 +1,5 @@
 def integer_params_decorated(func):
+
     def wrapper(self, *args, **kwargs):
         for i in args:
             if type(i) != int:
@@ -12,6 +13,7 @@ def integer_params_decorated(func):
 
 
 def integer_params(cls):
+
     methods = {k: v for k, v in cls.__dict__.items() if callable(v)}
     for k, v in methods.items():
         setattr(cls, k, integer_params_decorated(v))
